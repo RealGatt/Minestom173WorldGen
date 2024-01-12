@@ -7,3 +7,12 @@ Heavily based off of [SpottedLeaf](https://github.com/Spottedleaf/OldGenerator)'
 - Cave Gen
 - Ore Gen
 - Other dimensions
+
+# Implemented
+- Most decorations
+- Chunk loading and populating
+- Chunk unloading and stuff
+- Yeet
+
+
+See [Example](https://github.com/RealGatt/Minestom173WorldGen/blob/master/src/main/java/space/gatt/minestom173worldgen/Example.java) for usage
