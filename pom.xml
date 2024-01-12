@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>space.gatt</groupId>
+    <artifactId>Minestom173WorldGen</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>mvnrepository</id>
+            <url>https://repo1.maven.org/</url>
+        </repository>
+        <repository>
+            <id>fuso</id>
+            <url>https://repo.fusesource.com/nexus/content/repositories/releases-3rd-party/</url>
+        </repository>
+
+    </repositories>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>space.vectrix.flare</groupId>
+            <artifactId>flare</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>space.vectrix.flare</groupId>
+            <artifactId>flare-fastutil</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.common/google-collect -->
+        <dependency>
+            <groupId>com.google.common</groupId>
+            <artifactId>google-collect</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.hollowcube</groupId>
+            <artifactId>minestom-ce</artifactId>
+            <version>dev</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                    <artifactId>shrinkwrap-resolver-depchain</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+
+    </dependencies>
+
+</project>
