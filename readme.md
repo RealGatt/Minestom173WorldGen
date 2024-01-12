@@ -7,6 +7,9 @@ Heavily based off of [SpottedLeaf](https://github.com/Spottedleaf/OldGenerator)'
 - Cave Gen
 - Ore Gen
 - Other dimensions
+- Actual good thread management (any sort of thread management)
+- Decent speed
+- Half a brain about proper world gen
 
 # Implemented
 - Most decorations
