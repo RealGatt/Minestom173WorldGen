@@ -31,7 +31,7 @@ public class WorldGenDungeons  extends WorldGenerator {
 						return false;
 					}
 
-					if (l1 == centerY + b0 + 1 && BlockCheck.isBuildableMaterial(material)) {
+					if (l1 == centerY + b0 + 1 && !BlockCheck.isBuildableMaterial(material)) {
 						return false;
 					}
 

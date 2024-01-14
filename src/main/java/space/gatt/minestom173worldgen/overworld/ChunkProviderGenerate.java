@@ -1,9 +1,6 @@
 package space.gatt.minestom173worldgen.overworld;
 
-import space.gatt.minestom173worldgen.BetaChunk;
-import space.gatt.minestom173worldgen.BiomeBase;
-import space.gatt.minestom173worldgen.GeneratorAssistance;
-import space.gatt.minestom173worldgen.WorldChunkManager;
+import space.gatt.minestom173worldgen.*;
 import space.gatt.minestom173worldgen.noise.NoiseGeneratorOctaves;
 import space.gatt.minestom173worldgen.populator.*;
 import net.minestom.server.coordinate.Point;
@@ -39,7 +36,7 @@ public class ChunkProviderGenerate {
 	private double[] terrainNoise5;
 	private double[] snowNoise;
 
-//	private final MapGenBase caveGenerator = new MapGenCaves();
+	private final MapGenBase caveGenerator;
 
 	private BiomeBase[] biomeNoiseCache;
 	private final long seed;
@@ -48,6 +45,7 @@ public class ChunkProviderGenerate {
 
 	public ChunkProviderGenerate(Instance instance, long seed) {
 		generatorAssistance = new GeneratorAssistance();
+		this.caveGenerator = new MapGenCaves(seed, generatorAssistance);
 		this.instance = instance;
 		this.seed = seed;
 		this.worldChunkManager = new WorldChunkManager(seed);
@@ -336,7 +334,7 @@ public class ChunkProviderGenerate {
 
 		this.generateBareTerrain(chunkX, chunkZ, chunkData, this.worldChunkManager.temperature);
 		this.generateBiomeTerrain(chunkX, chunkZ, chunkData, this.biomeNoiseCache);
-//		this.caveGenerator.generate(this.world, chunkX, chunkZ, chunkData);
+		this.caveGenerator.generate(this.instance, chunkX, chunkZ, chunkData);
 	}
 
 	public synchronized void populateChunk(BetaChunk chunk) {
@@ -345,7 +343,6 @@ public class ChunkProviderGenerate {
 
 		int blockX = chunkX * 16;
 		int blockZ = chunkZ * 16;
-//		System.out.println("Populating chunk at " + blockX + " " + blockZ + " (" + chunkX + " " + chunkZ + ")");
 
 		BiomeBase biomebase = this.worldChunkManager.getBiome(blockX + 16, blockZ + 16);
 
@@ -384,68 +381,68 @@ public class ChunkProviderGenerate {
 			(new WorldGenDungeons()).populate(chunk, this.random, centerY, centerZ, j2); //sometimes y isn't y...
 		}
 //
-//		for (centerX = 0; centerX < 10; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(128);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenClay173(32)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
-//
-//		for (centerX = 0; centerX < 20; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(128);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenMinable173(BlockConstants.DIRT, 32)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
-//
-//		for (centerX = 0; centerX < 10; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(128);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenMinable173(BlockConstants.GRAVEL, 32)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
-//
-//		for (centerX = 0; centerX < 20; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(128);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenMinable173(BlockConstants.COAL_ORE, 16)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
-//
-//		for (centerX = 0; centerX < 20; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(64);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenMinable173(BlockConstants.IRON_ORE, 8)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
-//
-//		for (centerX = 0; centerX < 2; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(32);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenMinable173(BlockConstants.GOLD_ORE, 8)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
-//
-//		for (centerX = 0; centerX < 8; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(16);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenMinable173(BlockConstants.REDSTONE_ORE, 7)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
-//
-//		for (centerX = 0; centerX < 1; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(16);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenMinable173(BlockConstants.DIAMOND_ORE, 7)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
-//
-//		for (centerX = 0; centerX < 1; ++centerX) {
-//			centerY = blockX + this.random.nextInt(16);
-//			centerZ = this.random.nextInt(16) + this.random.nextInt(16);
-//			j2 = blockZ + this.random.nextInt(16);
-//			(new WorldGenMinable173(BlockConstants.LAPIS_ORE, 6)).populate(blockAccess, this.random, centerY, centerZ, j2);
-//		}
+		for (centerX = 0; centerX < 10; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(128);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenClay(32)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
+
+		for (centerX = 0; centerX < 20; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(128);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenMinable(Block.DIRT, 32)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
+
+		for (centerX = 0; centerX < 10; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(128);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenMinable(Block.GRAVEL, 32)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
+
+		for (centerX = 0; centerX < 20; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(128);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenMinable(Block.COAL_ORE, 16)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
+
+		for (centerX = 0; centerX < 20; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(64);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenMinable(Block.IRON_ORE, 8)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
+
+		for (centerX = 0; centerX < 2; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(32);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenMinable(Block.GOLD_ORE, 8)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
+
+		for (centerX = 0; centerX < 8; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(16);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenMinable(Block.REDSTONE_ORE, 7)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
+
+		for (centerX = 0; centerX < 1; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(16);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenMinable(Block.DIAMOND_ORE, 7)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
+
+		for (centerX = 0; centerX < 1; ++centerX) {
+			centerY = blockX + this.random.nextInt(16);
+			centerZ = this.random.nextInt(16) + this.random.nextInt(16);
+			j2 = blockZ + this.random.nextInt(16);
+			(new WorldGenMinable(Block.LAPIS_ORE, 6)).populate(chunk, this.random, centerY, centerZ, j2);
+		}
 
 		d0 = 0.5D;
 		centerX = (int) ((this.treeCountNoise.generateNoiseForCoordinate((double) blockX * d0, (double) blockZ * d0) / 8.0D + this.random.nextDouble() * 4.0D + 4.0D) / 3.0D);
@@ -651,25 +648,5 @@ public class ChunkProviderGenerate {
 			}
 		}
 
-
-//		this.snowNoise = this.worldChunkManager.createNoise(this.snowNoise, blockX, blockZ, 16, 16);
-//
-//		for (i3 = blockX ; i3 < blockX + 16; ++i3) {
-//			for (l2 = blockZ ; l2 < blockZ  + 16; ++l2) {
-//				k3 = i3 - (blockX);
-//				j3 = l2 - (blockZ);
-//				int l3 = generatorAssistance.getHighestPointYAt(chunk.getInstance(), i3, l2);
-//				double d1 = this.snowNoise[k3 * 16 + j3] - (double) (l3 - 64) / 64.0D * 0.3D;
-//
-//				Block below = chunk.getInstance().getBlock(i3, l3 - 1, l2);
-//
-//				if (d1 < 0.5D && l3 > 0 && l3 < 128 &&
-//						chunk.getInstance().getBlock(i3, l3, l2).isAir() &&
-//						below.isSolid() &&
-//						below != Block.ICE) {
-//					chunk.getInstance().setBlock(i3, l3, l2, Block.SNOW, false);
-//				}
-//			}
-//		}
 	}
 }

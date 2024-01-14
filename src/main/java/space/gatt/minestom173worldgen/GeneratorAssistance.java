@@ -34,6 +34,18 @@ public class GeneratorAssistance {
 	public GeneratorAssistance() {
 	}
 
+	public Block getType(final GenerationUnit chunkData, final int index) {
+
+		// index = x << 11 | z << 7 | y where x and z are in [0, 15] and y is in [0, 127]
+		final int z = index >> 7 & 0xF;
+		final int x = index >> 11 & 0xF;
+		final int y = index & 0x7F;
+
+		return getType(chunkData,x, y, z);
+	}
+
+
+
 	public Block getType(GenerationUnit chunkData, final int x,  final int y,  final int z) {
 		Point start = chunkData.absoluteStart();
 		Point blockPosition = start.add(x, 0, z).withY(y);
