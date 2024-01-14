@@ -1,12 +1,12 @@
 package space.gatt.minestom173worldgen.populator;
 
-import net.gatt.minestomholder.blockhandlers.ChestHandler;
 import space.gatt.minestom173worldgen.BetaChunk;
 import space.gatt.minestom173worldgen.BlockCheck;
 import net.minestom.server.entity.EntityType;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
+import space.gatt.minestom173worldgen.blockhandlers.ChestHandler;
 
 import java.util.Random;
 

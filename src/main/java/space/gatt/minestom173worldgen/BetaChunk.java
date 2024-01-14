@@ -39,8 +39,15 @@ public class BetaChunk extends DynamicChunk {
 
 	@Override
 	protected void onLoad() {
+		this.loaded = true;
 		super.onLoad();
 	}
+
+	@Override
+	public boolean isLoaded() {
+		return loaded;
+	}
+
 	/**
 	 * Sets the chunk as "unloaded".
 	 */
@@ -96,38 +103,8 @@ public class BetaChunk extends DynamicChunk {
 		});
 	}
 
-	private EHologram debugHologram = null;
-
 	@Override
 	public void tick(long time) {
-		if (debugHologram == null) {
-			debugHologram = new EHologram(
-				new Pos(
-						(double) (getChunkX() * 16) - 8,
-						100,
-						(double) (getChunkZ() * 16) - 8
-				),
-				getInstance(),
-				Component.text(this.getViewers().size())
-			);
-			debugHologram.setFollowPlayers(true);
-		} else {
-			if (!this.getViewers().isEmpty()) {
-				if (!debugHologram.isSpawned()) debugHologram.spawn();
-			} else {
-				debugHologram.remove();
-				debugHologram = null;
-				return;
-			}
-
-			if (isPopulated()) {
-				debugHologram.setLine(Component.text("POPULATED").color(NamedTextColor.GREEN));
-			} else if (isMarkedForPopulation() && !isPopulated()) {
-				debugHologram.setLine(Component.text("MARKED").color(NamedTextColor.YELLOW));
-			} else {
-				debugHologram.setLine(Component.text("SAD FACE").color(NamedTextColor.RED));
-			}
-		}
 		if (!getViewers().isEmpty() && !isPopulated() && !isMarkedForPopulation() && isLoaded()) {
 			doPopulate();
 		}
