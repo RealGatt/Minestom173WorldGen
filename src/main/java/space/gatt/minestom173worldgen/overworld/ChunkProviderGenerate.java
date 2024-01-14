@@ -327,7 +327,6 @@ public class ChunkProviderGenerate {
 			for (int z = 0; z <= 15; ++z) {
 				BiomeBase b = this.biomeNoiseCache[x | (z << 4)];
 				for (int y = 0 ; y < instance.getDimensionType().getMaxY(); ++y) {
-					generatorAssistance.setBiome(chunkX, chunkZ, b);
 					chunkData.modifier().setBiome(
 							start.add(x, 0, z).withY(y), b.biome
 					);

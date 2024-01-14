@@ -5,36 +5,30 @@ import net.minestom.server.coordinate.Pos;
 import net.minestom.server.instance.Instance;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.instance.generator.GenerationUnit;
+import space.vectrix.flare.fastutil.Long2ObjectSyncMap;
 
 import java.util.HashMap;
 
+import static net.minestom.server.utils.chunk.ChunkUtils.getBlockIndex;
+
 public class GeneratorAssistance {
 
-	private final HashMap<String, Block> blockPointMap = new HashMap<>();
-	private final HashMap<String, BiomeBase> biomePointMap = new HashMap<>();
+	private final Long2ObjectSyncMap<Block> blockPositions = Long2ObjectSyncMap.hashmap();
 
 	private void setBlockPoint(Point point, Block block) {
-		String pointStr = "x:" + point.blockX() + "y:" + point.blockY() + "z:" + point.blockZ();
-		blockPointMap.put(pointStr, block);
+		int blockIndex = getBlockIndex(
+				point.blockX(), point.blockY(), point.blockZ()
+		);
+		blockPositions.put(blockIndex, block);
 	}
 	private Block getBlockPoint(Point point) {
-		String pointStr = "x:" + point.blockX() + "y:" + point.blockY() + "z:" + point.blockZ();
-		if (!blockPointMap.containsKey(pointStr))
+
+		int blockIndex = getBlockIndex(
+				point.blockX(), point.blockY(), point.blockZ()
+		);
+		if (!blockPositions.containsKey(blockIndex))
 			return Block.AIR;
-
-		return blockPointMap.getOrDefault(pointStr, Block.AIR);
-	}
-
-	public void setBiome(int chunkX, int chunkZ, BiomeBase biome) {
-		String pointStr = "x:" + chunkX + "z:" + chunkZ;
-		biomePointMap.put(pointStr, biome);
-	}
-	public BiomeBase getBiome(int chunkX, int chunkZ) {
-		String pointStr = "x:" + chunkX + "z:" + chunkZ;
-		if (!biomePointMap.containsKey(pointStr))
-			return null;
-
-		return biomePointMap.getOrDefault(pointStr, null);
+		return blockPositions.getOrDefault(blockIndex, Block.AIR);
 	}
 
 	public GeneratorAssistance() {
