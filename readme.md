@@ -4,7 +4,6 @@ Mostly working. Probably.
 Heavily based off of [SpottedLeaf](https://github.com/Spottedleaf/OldGenerator)'s work.
 
 # Not implemented:
-- Cave Gen
 - Ore Gen
 - Other dimensions
 - Actual good thread management (any sort of thread management)
@@ -15,6 +14,7 @@ Heavily based off of [SpottedLeaf](https://github.com/Spottedleaf/OldGenerator)'
 - Most decorations
 - Chunk loading and populating
 - Chunk unloading and stuff
+- Cave Gen
 - Yeet
 
 
