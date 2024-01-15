@@ -8,6 +8,9 @@ Heavily based off of [SpottedLeaf](https://github.com/Spottedleaf/OldGenerator)'
 - Actual good thread management (any sort of thread management)
 - Decent speed
 - Half a brain about proper world gen
+- Taiga Biome Tree Gen
+- Some other minor generation stuff
+- Better biome colours
 
 # Implemented
 - Most decorations
